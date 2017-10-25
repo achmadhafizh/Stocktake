@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="activity_padding_horizontal">16dp</dimen>
+    <dimen name="padd_10">10dp</dimen>
+    <dimen name="ic_delete">30dp</dimen>
+    <dimen name="qty">60dp</dimen>
+    <dimen name="barcode">150dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="small">12dp</dimen>
+    <dimen name="medium">14dp</dimen>
+    <dimen name="large">16dp</dimen>
+    <dimen name="extrasmall">18dp</dimen>
+    <dimen name="extramedium">20dp</dimen>
+    <dimen name="extralarge">22dp</dimen>
+</resources>

@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Stocktake</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu1">Direct Purchase</string>
+    <string name="submenu1">Scan Direct Purchase items</string>
+
+    <string name="menu2">Consignment</string>
+    <string name="submenu2">Scan Consignment items</string>
+
+    <string name="menu3">Upload Records</string>
+    <string name="submenu3">Send stocktake results to server</string>
+
+    <string name="menu4">Settings</string>
+    <string name="submenu4">Configure stocktake app</string>
+
+    <string name="text_inside_circle_button_text_normal">Text Inside Circle Button(Normal)</string>
+    <string name="text_inside_circle_button_text_highlighted">Text Inside Circle Button(Highlighted)</string>
+    <string name="text_inside_circle_button_text_unable">Text Inside Circle Button(Unable)</string>
+
+    <string name="text_outside_circle_button_text_normal">Text Outside Circle Button(Normal)</string>
+    <string name="text_outside_circle_button_text_highlighted">Text Outside Circle Button(Highlighted)</string>
+    <string name="text_outside_circle_button_text_unable">Text Outside Circle Button(Unable)</string>
+
+    <string name="text_ham_button_text_normal">Ham Button Text(Normal)</string>
+    <string name="text_ham_button_text_highlighted">Ham Button Text(Highlighted)</string>
+    <string name="text_ham_button_text_unable">Ham Button Text(Unable)</string>
+    <string name="text_ham_button_sub_text_normal">Ham Button Sub Text(Normal)</string>
+    <string name="text_ham_button_sub_text_highlighted">Ham Button Sub Text(Highlighted)</string>
+    <string name="text_ham_button_sub_text_unable">Ham Button Sub Text(Unable)</string>
+
+    <string name="hint_fixture">Fixture No</string>
+    <string name="hint_bc1">Barcode 1</string>
+    <string name="hint_bc2">Barcode 2</string>
+
+    <string name="err_msg_fixture1">Please scan fixture no</string>
+    <string name="err_msg_fixture2">Fixture less than 9 digits</string>
+    <string name="err_msg_bc11">Please scan barcode 1</string>
+    <string name="err_msg_bc12">Barcode 1 less than 13 digits</string>
+    <string name="err_msg_bc13">Invalid Barcode 1 Prefix</string>
+    <string name="err_msg_bc21">Please scan barcode 2</string>
+    <string name="err_msg_bc22">Barcode 2 less than 13 digits</string>
+    <string name="err_msg_bc23">Invalid Barcode 2 Prefix</string>
+
+    <string name="btn_submit">Submit</string>
+    <string name="btn_new_fixture">New Fixture</string>
+
+    <string name="delete">DELETE</string>
+    <string name="qty">Qty</string>
+    <string name="barcode">Barcode</string>
+    <string name="fixture">Fixture</string>
+</resources>
