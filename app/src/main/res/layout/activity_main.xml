@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
@@ -9,8 +8,8 @@
     tools:context="com.achmadhafizh.stocktake.activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -30,26 +29,15 @@
 
     </FrameLayout>
 
-    <Switch
-        android:id="@+id/draggable_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="Draggable   " />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <com.nightonke.boommenu.BoomMenuButton
-        android:id="@+id/bmb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="@dimen/fab_margin"
-        app:bmb_normalColor="@android:color/holo_blue_dark"
-        app:bmb_highlightedColor="@android:color/holo_blue_bright"
-        app:bmb_boomEnum="boomParabola_2"
-        app:bmb_showDuration="700"
-        app:bmb_hideDuration="700" />
+        <com.ashokvarma.bottomnavigation.BottomNavigationBar
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

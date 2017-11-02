@@ -3,10 +3,10 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu1">Direct Purchase</string>
-    <string name="submenu1">Scan Direct Purchase items</string>
+    <string name="submenu1">Search Direct Purchase items</string>
 
     <string name="menu2">Consignment</string>
-    <string name="submenu2">Scan Consignment items</string>
+    <string name="submenu2">Search Consignment items</string>
 
     <string name="menu3">Upload Records</string>
     <string name="submenu3">Send stocktake results to server</string>
@@ -29,24 +29,61 @@
     <string name="text_ham_button_sub_text_highlighted">Ham Button Sub Text(Highlighted)</string>
     <string name="text_ham_button_sub_text_unable">Ham Button Sub Text(Unable)</string>
 
+    <string name="hint_nik">NIK</string>
     <string name="hint_fixture">Fixture No</string>
     <string name="hint_bc1">Barcode 1</string>
     <string name="hint_bc2">Barcode 2</string>
+    <string name="hint_scanner_id">Scanner ID</string>
+    <string name="hint_password">Password</string>
 
-    <string name="err_msg_fixture1">Please scan fixture no</string>
-    <string name="err_msg_fixture2">Fixture less than 9 digits</string>
+    <string name="err_msg_nik1">Empty nik</string>
+    <string name="err_msg_nik2">6 - 8 digits</string>
+    <string name="err_msg_fixture1">Empty fixture</string>
+    <string name="err_msg_fixture2">9 digits</string>
+    <string name="err_msg_fixture3">Invalid fixture</string>
     <string name="err_msg_bc11">Please scan barcode 1</string>
     <string name="err_msg_bc12">Barcode 1 less than 13 digits</string>
     <string name="err_msg_bc13">Invalid Barcode 1 Prefix</string>
     <string name="err_msg_bc21">Please scan barcode 2</string>
     <string name="err_msg_bc22">Barcode 2 less than 13 digits</string>
     <string name="err_msg_bc23">Invalid Barcode 2 Prefix</string>
+    <string name="err_msg_scanner_id1">Scanner ID must be filled</string>
+    <string name="err_msg_scanner_id2">Scanner ID less than 2 digits</string>
+    <string name="err_msg_password1">Password must be filled</string>
+    <string name="err_msg_password2">Password less than 6 digits</string>
+    <string name="err_msg_password3">Incorrect Password!!!, Try again later</string>
+    <string name="err_msg_settings">Please check scanner settings</string>
 
     <string name="btn_submit">Submit</string>
     <string name="btn_new_fixture">New Fixture</string>
+    <string name="btn_download_config">Download Config</string>
+    <string name="btn_upload_records">Upload Records</string>
+    <string name="btn_clear_records">Clear Records</string>
 
     <string name="delete">DELETE</string>
     <string name="qty">Qty</string>
     <string name="barcode">Barcode</string>
     <string name="fixture">Fixture</string>
+
+    <string name="consignment">Consignment</string>
+    <string name="indent">Indent</string>
+    <string name="settings">Settings</string>
+
+    <string name="cancel">CANCEL</string>
+    <string name="save">SAVE</string>
+    <string name="ok">OK</string>
+    <string name="alert_notifikasi">This is notification</string>
+
+    <string name="change_scanner_id">Change Scanner ID</string>
+    <string name="show_password">Show Password</string>
+
+    <string name="unable_load">Unable Load Data</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="auth_error">Cannot connect to Internet...Please check your connection!</string>
+    <string name="parse_error">Parsing error! Please try again after some time!!</string>
+    <string name="connectivity_error">Please check internet connectivity.</string>
+    <string name="network_error">Cannot connect to Internet...Please check your connection!</string>
+    <string name="timeout_error">Connection TimeOut! Please check your internet connection</string>
+    <string name="server_error">The server could not be found. Please try again after some time!</string>
+    <string name="connection_error">Cannot connect to Internet...Please check your connection!</string>
 </resources>

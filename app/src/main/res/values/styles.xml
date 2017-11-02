@@ -14,4 +14,27 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="MyProgressBar" parent="android:Theme.Holo.Dialog">
+        <item name="android:alertDialogStyle">@style/CustomAlertDialogStyle</item>
+        <item name="android:windowBackground">@color/colorTransparent</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="CustomAlertDialogStyle">
+        <item name="android:bottomBright">@color/colorTransparent</item>
+        <item name="android:bottomDark">@color/colorTransparent</item>
+        <item name="android:bottomMedium">@color/colorTransparent</item>
+        <item name="android:centerBright">@color/colorTransparent</item>
+        <item name="android:centerDark">@color/colorTransparent</item>
+        <item name="android:centerMedium">@color/colorTransparent</item>
+        <item name="android:fullBright">@color/colorTransparent</item>
+        <item name="android:fullDark">@color/colorTransparent</item>
+        <item name="android:topBright">@color/colorTransparent</item>
+        <item name="android:topDark">@color/colorTransparent</item>
+    </style>
+
 </resources>

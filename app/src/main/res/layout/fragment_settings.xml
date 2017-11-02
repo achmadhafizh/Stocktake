@@ -1,13 +1,302 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="55dp">
 
-    <Switch
-        android:id="@+id/draggable_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Draggable   " />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_config"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:gravity="center"
+                    android:text="Device Config"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/large"
+                    android:textColor="@color/item_name" />
+
+                <TextView
+                    android:id="@+id/tv_title_scanner_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title"
+                    android:text="Scanner ID :"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_scanner_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title"
+                    android:layout_toRightOf="@+id/tv_title_scanner_id"
+                    android:gravity="end"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_title_store"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title_scanner_id"
+                    android:text="Store No - Name :"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_store"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_scanner_id"
+                    android:layout_toRightOf="@+id/tv_title_store"
+                    android:gravity="end"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_title_stamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_below="@+id/tv_title_store"
+                    android:text="Last Updated Config :"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_stamp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_below="@+id/tv_title_store"
+                    android:layout_toRightOf="@+id/tv_title_stamp"
+                    android:gravity="end"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <Button android:id="@+id/btn_download_config"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_below="@+id/cv_config"
+            android:text="@string/btn_download_config"
+            android:textSize="@dimen/small"
+            android:background="@color/colorPrimary"
+            android:foreground="@drawable/ripple"
+            android:textColor="@android:color/white"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_records"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_below="@+id/btn_download_config">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_title_records"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:gravity="center"
+                    android:text="Database Results"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/large"
+                    android:textColor="@color/item_name" />
+
+                <TextView
+                    android:id="@+id/tv_title_consignment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title_records"
+                    android:gravity="center"
+                    android:text="Consignment"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/medium" />
+
+                <TextView
+                    android:id="@+id/tv_title_records_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title_consignment"
+                    android:text="Total Records :"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_records_cs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title_consignment"
+                    android:layout_toRightOf="@+id/tv_title_records_cs"
+                    android:gravity="end"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_title_qty_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title_records_cs"
+                    android:text="Total Quantity :"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_qty_cs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title_records_cs"
+                    android:layout_toRightOf="@+id/tv_title_qty_cs"
+                    android:gravity="end"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_title_dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title_qty_cs"
+                    android:gravity="center"
+                    android:text="Direct Purchase"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/medium" />
+
+                <TextView
+                    android:id="@+id/tv_title_records_dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title_dp"
+                    android:text="Total Records :"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_records_dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_below="@+id/tv_title_dp"
+                    android:layout_toRightOf="@+id/tv_title_records_dp"
+                    android:gravity="end"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_title_qty_dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_below="@+id/tv_title_records_dp"
+                    android:text="Total Quantity :"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_qty_dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_below="@+id/tv_title_records_dp"
+                    android:layout_toRightOf="@+id/tv_title_qty_dp"
+                    android:gravity="end"
+                    android:textSize="@dimen/small"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <Button android:id="@+id/btn_upload_records"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/cv_records"
+            android:text="@string/btn_upload_records"
+            android:textSize="@dimen/small"
+            android:background="@color/colorPrimary"
+            android:foreground="@drawable/ripple"
+            android:textColor="@android:color/white"/>
+
+        <Button android:id="@+id/btn_clear_records"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@+id/btn_upload_records"
+            android:text="@string/btn_clear_records"
+            android:textSize="@dimen/small"
+            android:background="@color/colorAccent"
+            android:foreground="@drawable/ripple"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
+
+</ScrollView>

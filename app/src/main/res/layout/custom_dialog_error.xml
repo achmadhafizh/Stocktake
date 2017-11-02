@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:text="@string/alert_notifikasi"
+        android:id="@+id/tv_detail"
+        android:textColor="@color/colorBlack"/>
+
+    <LinearLayout
+        android:id="@+id/ll_one_button"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <Button android:id="@+id/btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="@string/ok"
+            android:textSize="@dimen/medium"
+            android:background="@color/colorPrimary"
+            android:foreground="@drawable/ripple"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_two_button"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_margin="5dp">
+
+        <Button android:id="@+id/button_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="@string/ok"
+            android:textSize="@dimen/medium"
+            android:background="@color/colorPrimary"
+            android:foreground="@drawable/ripple"
+            android:textColor="@android:color/white"/>
+
+        <Button android:id="@+id/button_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textSize="@dimen/medium"
+            android:background="@color/colorPrimary"
+            android:foreground="@drawable/ripple"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+</LinearLayout>

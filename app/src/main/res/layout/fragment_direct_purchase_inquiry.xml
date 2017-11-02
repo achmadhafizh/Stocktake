@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_outer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapCharacters">
+    </android.support.v7.widget.SearchView>
+
+    <RelativeLayout
+        android:id="@+id/rl_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchView"
+        android:layout_marginBottom="5dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/padd_10">
+
+                <TextView
+                    android:id="@+id/tv_qty"
+                    android:text="@string/qty"
+                    android:layout_width="@dimen/table_header"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_padding_horizontal"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_barcode"
+                    android:text="@string/barcode"
+                    android:layout_width="@dimen/barcode"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_toRightOf="@id/tv_qty"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_fixture"
+                    android:text="@string/fixture"
+                    android:layout_width="@dimen/barcode"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_padding_horizontal"
+                    android:textColor="@android:color/white"
+                    android:layout_toRightOf="@id/tv_barcode"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cv_header"
+            android:layout_above="@+id/cv_footer"
+            android:scrollbars="vertical" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="@dimen/bottom_navigation_margin"
+                android:padding="@dimen/padd_10">
+
+                <TextView
+                    android:id="@+id/tv_qty_footer"
+                    android:text="@string/qty"
+                    android:layout_width="@dimen/table_header"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_padding_horizontal"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_barcode_footer"
+                    android:text="@string/barcode"
+                    android:layout_width="@dimen/barcode"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_toRightOf="@id/tv_qty_footer"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_fixture_footer"
+                    android:text="@string/fixture"
+                    android:layout_width="@dimen/barcode"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_padding_horizontal"
+                    android:textColor="@android:color/white"
+                    android:layout_toRightOf="@id/tv_barcode_footer"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+</RelativeLayout>

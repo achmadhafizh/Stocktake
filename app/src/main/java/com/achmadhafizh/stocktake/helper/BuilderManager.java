@@ -1,4 +1,4 @@
-package com.achmadhafizh.stocktake.adapter;
+package com.achmadhafizh.stocktake.helper;
 
 import android.graphics.Color;
 import android.util.Pair;
@@ -42,16 +42,12 @@ public class BuilderManager {
 
     private static int[] textResources = new int[]{
             R.string.menu1,
-            R.string.menu2,
-            R.string.menu3,
-            R.string.menu4
+            R.string.menu2
     };
 
     private static int[] subTextResources = new int[]{
             R.string.submenu1,
-            R.string.submenu2,
-            R.string.submenu3,
-            R.string.submenu4
+            R.string.submenu2
     };
 
     private static int imageResourceIndex = 0;
@@ -125,7 +121,7 @@ public class BuilderManager {
                 .normalTextRes(R.string.text_outside_circle_button_text_normal);
     }
 
-    static TextOutsideCircleButton.Builder getTextOutsideCircleButtonBuilderWithDifferentPieceColor() {
+    public static TextOutsideCircleButton.Builder getTextOutsideCircleButtonBuilderWithDifferentPieceColor() {
         return new TextOutsideCircleButton.Builder()
                 .normalImageRes(getImageResource())
                 .normalTextRes(R.string.text_outside_circle_button_text_normal)
@@ -153,7 +149,7 @@ public class BuilderManager {
                 .subNormalTextRes(R.string.text_ham_button_sub_text_normal);
     }
 
-    static HamButton.Builder getHamButtonBuilderWithDifferentPieceColor() {
+    public static HamButton.Builder getHamButtonBuilderWithDifferentPieceColor() {
         return new HamButton.Builder()
                 .normalImageRes(getImageResource())
                 .normalTextRes(R.string.text_ham_button_text_normal)

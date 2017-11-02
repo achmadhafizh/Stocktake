@@ -48,8 +48,8 @@ import butterknife.OnClick;
 
 import static com.achmadhafizh.stocktake.utilities.CommonConstant.ARG_ITEM;
 
-public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
-    private static final String TAG = ConsignmentFragment.class.getSimpleName();
+public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
+    private static final String TAG = DirectPurchaseFragment.class.getSimpleName();
     private SettingsManager settingsManager;
     private DatabaseManager db;
     private List<Stocktake> stocktakeList;
@@ -99,10 +99,10 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
     @BindView(R.id.tv_fixture_footer)
     TextView tv_fixture_footer;
 
-    public ConsignmentFragment() {}
+    public DirectPurchaseFragment() {}
 
-    public static ConsignmentFragment newInstance(String section) {
-        ConsignmentFragment fragment = new ConsignmentFragment();
+    public static DirectPurchaseFragment newInstance(String section) {
+        DirectPurchaseFragment fragment = new DirectPurchaseFragment();
         Bundle args = new Bundle();
         args.putString(ARG_ITEM, section);
         fragment.setArguments(args);
@@ -117,7 +117,7 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_consignment, container, false);
+        return inflater.inflate(R.layout.fragment_direct_purchase, container, false);
     }
 
     @Override
@@ -278,8 +278,7 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
             tv_qty_footer.setText(total  + " Pcs");
 
             // showing snack bar with Undo option
-            Snackbar snackbar = Snackbar
-                    .make(relativeLayout, bc1 + " removed from cart!", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(relativeLayout, bc1 + " removed from cart!", Snackbar.LENGTH_LONG);
             snackbar.setAction("UNDO", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -311,16 +310,16 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
     }
 
     private void prepareListData() {
-        Log.d("Reading all ", "Stocktake CS");
-        List<Stocktake> items = db.getAllStocktakeCS();
+        Log.d("Reading all ", "Stocktake DP");
+        List<Stocktake> items = db.getAllStocktakeDP();
         int total = 0;
 
         for (Stocktake stk : items) {
             total = total + stk.getQty();
             String log = "Id: " + stk.getId() + ", Type: " + stk.getType() + ", Fixture: " + stk.getFixture() +
-                         ", Barcode 1: " + stk.getBc1() + ", Barcode 2: " + stk.getBc2() + ", Qty: " + stk.getQty() +
-                         ", Nik: " + stk.getNik() + " ,Scanner: " + stk.getScanner() + " ,Flag: " + stk.getFlag();
-            Log.d("All CS Records ", log);
+                    ", Barcode 1: " + stk.getBc1() + ", Barcode 2: " + stk.getBc2() + ", Qty: " + stk.getQty() +
+                    ", Nik: " + stk.getNik() + " ,Scanner: " + stk.getScanner() + " ,Flag: " + stk.getFlag();
+            Log.d("All DP Records ", log);
         }
 
         tv_qty_footer.setText(total + " Pcs");
@@ -347,21 +346,21 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
             return;
         }
 
-        String type = "CS";
+        String type = "DP";
         String nik = inputNik.getText().toString().trim();
         String fixture = inputFixture.getText().toString().trim();
         String bc1 = inputBc1.getText().toString().trim();
         String bc2 = inputBc2.getText().toString().trim();
 
-        int cnt = db.getStocktakeCountCS(fixture, bc1, bc2);
-        Log.d("Count Stocktake CS ", cnt + "");
+        int cnt = db.getStocktakeCountDP(fixture, bc1, bc2);
+        Log.d("Count Stocktake DP ", cnt + "");
 
         if(cnt > 0) {
             Stocktake st = db.getSpesificStocktake(type, fixture, bc1, bc2);
 
             String data = "Id: " + st.getId() + " ,Type: " + st.getType() + " ,Fixture: " + st.getFixture() +
-                          " ,Barcode 1: " + st.getBc1() + " ,Barcode 2: " + st.getBc2() + " ,Qty: " + st.getQty() +
-                          " ,Nik: " + st.getNik() + " ,Scanner: " + st.getScanner() + " ,Flag: " + st.getFlag();
+                    " ,Barcode 1: " + st.getBc1() + " ,Barcode 2: " + st.getBc2() + " ,Qty: " + st.getQty() +
+                    " ,Nik: " + st.getNik() + " ,Scanner: " + st.getScanner() + " ,Flag: " + st.getFlag();
             Log.d("Spesific Records ", data);
 
             int id = st.getId();
@@ -452,8 +451,8 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
             inputLayoutBc1.setError(getString(R.string.err_msg_bc12));
             requestFocus(inputBc1);
             return false;
-        } else if (Integer.parseInt(inputBc1.getText().toString().trim().substring(0, 1)) < 4 ||
-                   Integer.parseInt(inputBc1.getText().toString().trim().substring(0, 1)) > 4) {
+        } else if (Integer.parseInt(inputBc1.getText().toString().trim().substring(0, 1)) < 5 ||
+                Integer.parseInt(inputBc1.getText().toString().trim().substring(0, 1)) > 5) {
             inputLayoutBc1.setError(getString(R.string.err_msg_bc13));
             requestFocus(inputBc1);
             inputBc1.setSelectAllOnFocus(true);
@@ -485,7 +484,7 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
             requestFocus(inputBc2);
             return false;
         } else if (Integer.parseInt(inputBc2.getText().toString().trim().substring(0, 1)) < 7 ||
-                   Integer.parseInt(inputBc2.getText().toString().trim().substring(0, 1)) > 7) {
+                Integer.parseInt(inputBc2.getText().toString().trim().substring(0, 1)) > 7) {
             inputLayoutBc2.setError(getString(R.string.err_msg_bc23));
             requestFocus(inputBc2);
             inputBc2.setSelectAllOnFocus(true);

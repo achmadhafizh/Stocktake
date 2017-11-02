@@ -40,14 +40,14 @@
 
         <TextView
             android:id="@+id/qty"
-            android:layout_width="@dimen/qty"
-            android:layout_height="@dimen/qty"
+            android:layout_width="@dimen/qty_width"
+            android:layout_height="@dimen/qty_height"
             android:layout_marginRight="@dimen/activity_padding_horizontal"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
-            android:textSize="@dimen/large" />
+            android:textSize="@dimen/medium" />
 
         <TextView
             android:id="@+id/bc1"
@@ -57,9 +57,8 @@
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/description"
-            android:textSize="@dimen/medium" />
+            android:textSize="@dimen/medium"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/bc2"
@@ -70,13 +69,13 @@
             android:gravity="center"
             android:fontFamily="sans-serif-medium"
             android:layout_below="@id/bc1"
-            android:textColor="@color/description"
-            android:textSize="@dimen/medium" />
+            android:textSize="@dimen/medium"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/fixture"
             android:layout_width="@dimen/barcode"
-            android:layout_height="@dimen/qty"
+            android:layout_height="@dimen/qty_height"
             android:layout_toRightOf="@id/bc1"
             android:layout_marginLeft="@dimen/activity_padding_horizontal"
             android:ellipsize="end"

@@ -11,6 +11,9 @@ public class Stocktake {
     private String bc1;
     private String bc2;
     private int qty;
+    private String nik;
+    private String scanner;
+    private int flag;
 
     public Stocktake() {
     }
@@ -24,21 +27,27 @@ public class Stocktake {
         this.qty = qty;
     }
 
-    public Stocktake(String type, String fixture, String bc1, String bc2, int qty) {
+    public Stocktake(String type, String fixture, String bc1, String bc2, int qty, String nik, String scanner, int flag) {
         this.type = type;
         this.fixture = fixture;
         this.bc1 = bc1;
         this.bc2 = bc2;
         this.qty = qty;
+        this.nik = nik;
+        this.scanner = scanner;
+        this.flag = flag;
     }
 
-    public Stocktake(int id, String type, String fixture, String bc1, String bc2, int qty) {
+    public Stocktake(int id, String type, String fixture, String bc1, String bc2, int qty, String nik, String scanner, int flag) {
         this.id = id;
         this.type = type;
         this.fixture = fixture;
         this.bc1 = bc1;
         this.bc2 = bc2;
         this.qty = qty;
+        this.nik = nik;
+        this.scanner = scanner;
+        this.flag = flag;
     }
 
     public int getId() {
@@ -87,5 +96,29 @@ public class Stocktake {
 
     public void setQty(int qty) {
         this.qty = qty;
+    }
+
+    public String getNik() {
+        return nik;
+    }
+
+    public void setNik(String nik) {
+        this.nik = nik;
+    }
+
+    public String getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(String scanner) {
+        this.scanner = scanner;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 }
