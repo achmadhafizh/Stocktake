@@ -88,7 +88,7 @@ public class ConsignmentInquiryFragment extends Fragment implements RecyclerItem
         searchView.setQueryHint("Search Fixture Here");
 
         mStockTakeList = new ArrayList<>();
-        mAdapter = new FilteredAdapter(mStockTakeList);
+        mAdapter = new FilteredAdapter(mStockTakeList, false);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);

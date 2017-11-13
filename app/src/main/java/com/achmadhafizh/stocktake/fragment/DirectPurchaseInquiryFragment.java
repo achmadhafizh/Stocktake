@@ -90,7 +90,7 @@ public class DirectPurchaseInquiryFragment extends Fragment implements RecyclerI
         searchView.setQueryHint("Search Fixture Here");
 
         mStockTakeList = new ArrayList<>();
-        mAdapter = new FilteredAdapter(mStockTakeList);
+        mAdapter = new FilteredAdapter(mStockTakeList, true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);

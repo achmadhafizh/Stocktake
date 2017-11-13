@@ -21,10 +21,12 @@ import java.util.List;
 public class FilteredAdapter extends RecyclerView.Adapter<InquiryViewHolder> implements Filterable {
     private ArrayList<Stocktake> mArrayList;
     private ArrayList<Stocktake> mFilteredList;
+    private Boolean indent;
 
-    public FilteredAdapter(ArrayList<Stocktake> arrayList) {
+    public FilteredAdapter(ArrayList<Stocktake> arrayList, Boolean indent) {
         mArrayList = arrayList;
         mFilteredList = arrayList;
+        this.indent = indent;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class FilteredAdapter extends RecyclerView.Adapter<InquiryViewHolder> imp
     @Override
     public void onBindViewHolder(InquiryViewHolder inquiryViewHolder, int i) {
         final Stocktake model = mFilteredList.get(i);
-        inquiryViewHolder.bind(model);
+        inquiryViewHolder.bind(model, indent);
     }
 
     @Override

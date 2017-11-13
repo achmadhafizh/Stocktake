@@ -87,6 +87,12 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
     @BindView(R.id.input_bc2)
     EditText inputBc2;
 
+    @BindView(R.id.input_layout_qty)
+    TextInputLayout inputLayoutQty;
+
+    @BindView(R.id.input_qty)
+    EditText inputQty;
+
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -138,6 +144,7 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
         inputFixture.addTextChangedListener(new MyTextWatcher(inputFixture));
         inputBc1.addTextChangedListener(new MyTextWatcher(inputBc1));
         inputBc2.addTextChangedListener(new MyTextWatcher(inputBc2));
+        inputQty.addTextChangedListener(new MyTextWatcher(inputQty));
 
         inputNik.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -199,6 +206,24 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
                 if( keyCode == KeyEvent.KEYCODE_ENTER ) {
                     if( event.getAction() == KeyEvent.ACTION_UP ) {
                         if (validateBc2()) {
+                            requestFocus(inputQty);
+                            inputQty.setSelectAllOnFocus(true);
+                            inputQty.selectAll();
+                            //hideKeyboard(inputQty);
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        inputQty.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if( keyCode == KeyEvent.KEYCODE_ENTER ) {
+                    if( event.getAction() == KeyEvent.ACTION_UP ) {
+                        if (validateQty()) {
                             submitForm();
                         }
                     }
@@ -209,7 +234,7 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
         });
 
         stocktakeList = new ArrayList<>();
-        mAdapter = new InquiryAdapter(stocktakeList);
+        mAdapter = new InquiryAdapter(stocktakeList, true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -221,6 +246,9 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         prepareListData();
+
+        inputQty.setText("1");
+        requestFocus(inputNik);
     }
 
     @Override
@@ -346,11 +374,16 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
             return;
         }
 
+        if (!validateQty()) {
+            return;
+        }
+
         String type = "DP";
         String nik = inputNik.getText().toString().trim();
         String fixture = inputFixture.getText().toString().trim();
         String bc1 = inputBc1.getText().toString().trim();
         String bc2 = inputBc2.getText().toString().trim();
+        Integer qty = Integer.parseInt(inputQty.getText().toString().trim());
 
         int cnt = db.getStocktakeCountDP(fixture, bc1, bc2);
         Log.d("Count Stocktake DP ", cnt + "");
@@ -364,13 +397,13 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
             Log.d("Spesific Records ", data);
 
             int id = st.getId();
-            int qty = st.getQty();
-            int total_qty = qty + 1;
+            int stock = st.getQty();
+            int total_qty = stock + qty;
 
             db.updateStocktake(new Stocktake(id, total_qty));
             Log.d("Update ", "Updating ..");
         } else {
-            db.addStocktake(new Stocktake(type, fixture, bc1, bc2, 1, nik, scannerID.trim(), 0));
+            db.addStocktake(new Stocktake(type, fixture, bc1, bc2, qty, nik, scannerID.trim(), 0));
             Log.d("Insert ", "Inserting ..");
         }
 
@@ -498,6 +531,30 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
         return true;
     }
 
+    private boolean validateQty() {
+        if(scannerID == null || scannerID.isEmpty()) {
+            inputLayoutBc2.setError(getString(R.string.err_msg_settings));
+            requestFocus(inputBc2);
+            return false;
+        } else if(storeNo == null || storeNo.isEmpty()) {
+            inputLayoutBc2.setError(getString(R.string.err_msg_settings));
+            requestFocus(inputBc2);
+            return false;
+        } else if (inputQty.getText().toString().trim().isEmpty()) {
+            inputLayoutQty.setError(getString(R.string.err_msg_qty1));
+            requestFocus(inputQty);
+            return false;
+        } else if (Integer.parseInt(inputQty.getText().toString().trim()) < 1) {
+            inputLayoutQty.setError(getString(R.string.err_msg_qty2));
+            requestFocus(inputQty);
+            return false;
+        }  else {
+            inputLayoutQty.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -538,6 +595,9 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
                     break;
                 case R.id.input_bc2:
                     validateBc2();
+                    break;
+                case R.id.input_qty:
+                    validateQty();
                     break;
             }
         }

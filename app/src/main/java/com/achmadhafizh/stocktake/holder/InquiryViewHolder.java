@@ -40,10 +40,17 @@ public class InquiryViewHolder extends RecyclerView.ViewHolder {
         viewForeground = view.findViewById(R.id.view_foreground);
     }
 
-    public void bind(Stocktake stocktake) {
-        bc1.setText(stocktake.getBc1());
-        bc2.setText(stocktake.getBc2());
-        fixture.setText(stocktake.getFixture());
-        qty.setText(String.valueOf(stocktake.getQty()) + " Pcs");
+    public void bind(Stocktake stocktake, Boolean indent) {
+        if(indent) {
+            bc1.setText(stocktake.getBc1().substring(5, 11));
+            bc2.setText(String.valueOf(Integer.parseInt(stocktake.getBc2().substring(1, 12))));
+            fixture.setText(stocktake.getFixture());
+            qty.setText(String.valueOf(stocktake.getQty()) + " Pcs");
+        } else {
+            bc1.setText(stocktake.getBc1());
+            bc2.setText(stocktake.getBc2());
+            fixture.setText(stocktake.getFixture());
+            qty.setText(String.valueOf(stocktake.getQty()) + " Pcs");
+        }
     }
 }

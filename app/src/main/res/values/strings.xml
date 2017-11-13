@@ -35,6 +35,7 @@
     <string name="hint_bc2">Barcode 2</string>
     <string name="hint_scanner_id">Scanner ID</string>
     <string name="hint_password">Password</string>
+    <string name="hint_qty">Qty</string>
 
     <string name="err_msg_nik1">Empty nik</string>
     <string name="err_msg_nik2">6 - 8 digits</string>
@@ -47,6 +48,8 @@
     <string name="err_msg_bc21">Please scan barcode 2</string>
     <string name="err_msg_bc22">Barcode 2 less than 13 digits</string>
     <string name="err_msg_bc23">Invalid Barcode 2 Prefix</string>
+    <string name="err_msg_qty1">Empty qty</string>
+    <string name="err_msg_qty2">Min 1 qty</string>
     <string name="err_msg_scanner_id1">Scanner ID must be filled</string>
     <string name="err_msg_scanner_id2">Scanner ID less than 2 digits</string>
     <string name="err_msg_password1">Password must be filled</string>

@@ -17,15 +17,17 @@ import java.util.List;
 
 public class InquiryAdapter extends RecyclerView.Adapter<InquiryViewHolder> {
     private List<Stocktake> mStocktakeList;
+    private Boolean indent;
 
-    public InquiryAdapter(List<Stocktake> stocktakeList) {
+    public InquiryAdapter(List<Stocktake> stocktakeList, Boolean indent) {
         this.mStocktakeList = stocktakeList;
+        this.indent = indent;
     }
 
     @Override
     public void onBindViewHolder(InquiryViewHolder inquiryViewHolder, int i) {
         final Stocktake model = mStocktakeList.get(i);
-        inquiryViewHolder.bind(model);
+        inquiryViewHolder.bind(model, indent);
     }
 
     @Override

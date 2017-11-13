@@ -209,7 +209,7 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
         });
 
         stocktakeList = new ArrayList<>();
-        mAdapter = new InquiryAdapter(stocktakeList);
+        mAdapter = new InquiryAdapter(stocktakeList, false);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -221,6 +221,8 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         prepareListData();
+
+        requestFocus(inputNik);
     }
 
     @Override
