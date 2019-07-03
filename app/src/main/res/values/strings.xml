@@ -34,6 +34,7 @@
     <string name="hint_bc1">Barcode 1</string>
     <string name="hint_bc2">Barcode 2</string>
     <string name="hint_scanner_id">Scanner ID</string>
+    <string name="hint_store">Store No</string>
     <string name="hint_password">Password</string>
     <string name="hint_qty">Qty</string>
 
@@ -43,12 +44,12 @@
     <string name="err_msg_fixture2">9 digits</string>
     <string name="err_msg_fixture3">Invalid fixture</string>
     <string name="err_msg_bc11">Please scan barcode 1</string>
-    <string name="err_msg_bc12">Barcode 1 less than 13 digits</string>
+    <string name="err_msg_bc12">Barcode 1 less than 16 digits</string>
     <string name="err_msg_bc13">Invalid Barcode 1 Prefix</string>
     <string name="err_msg_bc21">Please scan barcode 2</string>
-    <string name="err_msg_bc22">Barcode 2 less than 13 digits</string>
+    <string name="err_msg_bc22">Barcode 2 less than 16 digits</string>
     <string name="err_msg_bc23">Invalid Barcode 2 Prefix</string>
-    <string name="err_msg_qty1">Empty qty</string>
+    <string name="err_msg_qty1">Qty must be filled</string>
     <string name="err_msg_qty2">Min 1 qty</string>
     <string name="err_msg_scanner_id1">Scanner ID must be filled</string>
     <string name="err_msg_scanner_id2">Scanner ID less than 2 digits</string>
@@ -56,6 +57,8 @@
     <string name="err_msg_password2">Password less than 6 digits</string>
     <string name="err_msg_password3">Incorrect Password!!!, Try again later</string>
     <string name="err_msg_settings">Please check scanner settings</string>
+    <string name="err_msg_store1">Store Location must be filled</string>
+    <string name="err_msg_store2">Store Location less than 2 digits</string>
 
     <string name="btn_submit">Submit</string>
     <string name="btn_new_fixture">New Fixture</string>
@@ -79,6 +82,8 @@
 
     <string name="change_scanner_id">Change Scanner ID</string>
     <string name="show_password">Show Password</string>
+
+    <string name="store_location">Input Store Location</string>
 
     <string name="unable_load">Unable Load Data</string>
     <string name="auth_failed">Authentication failed</string>

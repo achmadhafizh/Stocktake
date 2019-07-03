@@ -19,6 +19,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.achmadhafizh.stocktake.R;
 import com.achmadhafizh.stocktake.activity.MainActivity;
@@ -145,7 +146,7 @@ public class SettingsFragment extends Fragment {
 
     @OnClick(R.id.btn_download_config)
     public void download() {
-        downloadConfig();
+        inputConfig();
     }
 
     @OnClick(R.id.btn_upload_records)
@@ -169,15 +170,16 @@ public class SettingsFragment extends Fragment {
                 String scanner = stk.getScanner();
                 String fixture = stk.getFixture();
                 String store = stk.getFixture().substring(0, 2);
-                String sku = stk.getBc1().substring(5, 12);
-                String classno = stk.getBc1().substring(0, 5);
-                String price = stk.getBc2().substring(1, 12);
+                String sku = stk.getBc2().substring(14, 16);
+                String classno = stk.getBc1().substring(1, 5);
+                String price = stk.getBc1().substring(5, 16);
                 Integer qty = stk.getQty();
                 String nik = stk.getNik();
                 String type = stk.getType();
                 String stamp = currDate;
 
-                uploadDataCS(id.toString(), scanner, fixture, store, sku, classno, price, qty.toString(), nik, stamp, type);
+                uploadDataCS(id.toString(), scanner, fixture, stk.getBc1(), stk.getBc2(), qty.toString(), nik, stamp, type);
+                //uploadDataCS(id.toString(), scanner, fixture, store, sku, classno, price, qty.toString(), nik, stamp, type);
             }
 
             flag_cs = true;
@@ -203,14 +205,15 @@ public class SettingsFragment extends Fragment {
                 String type = stk.getType();
                 String stamp = currDate;
 
-                uploadDataDP(id.toString(), scanner, fixture, store, sku, classno, price, qty.toString(), nik, stamp, type);
+                uploadDataDP(id.toString(), scanner, fixture, stk.getBc1(), stk.getBc2(), qty.toString(), nik, stamp, type);
             }
 
             flag_dp = true;
         }
 
         if(flag_cs == true || flag_dp == true) {
-            showMessage("Successfully uploads");
+            //showMessage("Finish upload data");
+            Toast.makeText(getActivity().getApplicationContext(), "Finish upload data.", Toast.LENGTH_SHORT).show();
         } else {
             showMessage("Please check total qty and records");
         }
@@ -366,6 +369,58 @@ public class SettingsFragment extends Fragment {
         alertDialog.show();
     }
 
+    private void inputConfig() {
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        dialogView = inflater.inflate(R.layout.custom_dialog_input, null);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setCancelable(false);
+
+        final LinearLayout llScanner = (LinearLayout) dialogView.findViewById(R.id.ll_create_scanner_id);
+        final LinearLayout llConfig = (LinearLayout) dialogView.findViewById(R.id.ll_config);
+        final LinearLayout llOneButton = (LinearLayout) dialogView.findViewById(R.id.ll_one_button);
+        final LinearLayout llTwoButton = (LinearLayout) dialogView.findViewById(R.id.ll_two_button);
+        final EditText etStore = (EditText) dialogView.findViewById(R.id.et_store);
+        final Button btnYes = (Button) dialogView.findViewById(R.id.button_save);
+        final Button btnNo = (Button) dialogView.findViewById(R.id.button_cancel);
+
+        llScanner.setVisibility(View.GONE);
+        llConfig.setVisibility(View.VISIBLE);
+        llOneButton.setVisibility(View.GONE);
+        llTwoButton.setVisibility(View.VISIBLE);
+        btnYes.setText("Yes");
+        btnNo.setText("No");
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                settingPrefs = settingsManager.getSettings();
+                String store = etStore.getText().toString().trim();
+
+                if(store.isEmpty()) {
+                    etStore.setError(getResources().getString(R.string.err_msg_store1));
+                } else if (store.length() < 2) {
+                    etStore.setError(getResources().getString(R.string.err_msg_store2));
+                } else {
+                    downloadConfig(store);
+                    alertDialog.dismiss();
+                }
+            }
+        });
+
+        alertDialog.show();
+    }
+
     private void inputPassword() {
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -376,6 +431,7 @@ public class SettingsFragment extends Fragment {
 
         final LinearLayout llOneButton = (LinearLayout) dialogView.findViewById(R.id.ll_one_button);
         final LinearLayout llTwoButton = (LinearLayout) dialogView.findViewById(R.id.ll_two_button);
+        final TextView title = (TextView) dialogView.findViewById(R.id.tv_title_create_password);
         final EditText etScannerID = (EditText) dialogView.findViewById(R.id.et_scanner_id);
         final EditText etPassword = (EditText) dialogView.findViewById(R.id.et_password);
         final CheckBox showPassword = (CheckBox) dialogView.findViewById(R.id.showPassword);
@@ -385,6 +441,7 @@ public class SettingsFragment extends Fragment {
         etScannerID.setVisibility(View.GONE);
         llOneButton.setVisibility(View.GONE);
         llTwoButton.setVisibility(View.VISIBLE);
+        title.setText("Clear Records");
         btnYes.setText("Yes");
         btnNo.setText("No");
 
@@ -433,7 +490,7 @@ public class SettingsFragment extends Fragment {
         alertDialog.show();
     }
 
-    private void downloadConfig() {
+    private void downloadConfig(final String store_no) {
         customProgressDialog.showDialog();
 
         StringRequest volleyRequest = new StringRequest(Request.Method.POST, CommonConstant.URL_DATA_CONFIG, new Response.Listener<String>() {
@@ -448,21 +505,18 @@ public class SettingsFragment extends Fragment {
                     if (error) {
                         showMessage(responseObject.getString("message"));
                     } else {
-                        JSONArray dataArray = responseObject.getJSONArray("data");
-                        for (int k = 0; k < dataArray.length(); k++) {
-                            JSONObject data = dataArray.getJSONObject(k);
-                            String store_no = data.getString("store_no").trim();
-                            String store_name = data.getString("branch_name").trim();
-                            String password = data.getString("password").trim();
-                            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                        JSONObject data = responseObject.getJSONObject("data");
+                        String store_no = data.getString("store_no").trim();
+                        String store_name = data.getString("branch_name").trim();
+                        String password = data.getString("password").trim();
+                        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
-                            settingsManager.saveSettings("", store_no, store_name, password, currentDateTimeString);
+                        settingsManager.saveSettings("", store_no, store_name, password, currentDateTimeString);
 
-                            tvStore.setText(store_no + " - " + store_name);
-                            tvStamp.setText(currentDateTimeString);
+                        tvStore.setText(store_no + " - " + store_name);
+                        tvStamp.setText(currentDateTimeString);
 
-                            showMessage("Configurations successfully updated");
-                        }
+                        showMessage("Configurations successfully updated");
                     }
 
                 } catch (JSONException e) {
@@ -484,11 +538,8 @@ public class SettingsFragment extends Fragment {
                     if (customProgressDialog.isShowing()) {
                         customProgressDialog.hideDialog();
                     }
-                    if (error.networkResponse.statusCode == 400) {
-                        showMessage(getResources().getString(R.string.network_error));
-                    } else {
-                        showMessage(getResources().getString(R.string.timeout_error));
-                    }
+
+                    showMessage("Oops... Something went wrong!");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -498,6 +549,9 @@ public class SettingsFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params = new HashMap<String, String>();
+                params.put("store_no", store_no);
+                params.put("status", "1");
+
                 return params;
             }
 
@@ -515,15 +569,14 @@ public class SettingsFragment extends Fragment {
         MyApplication.getInstance().addToRequestQueue(volleyRequest, CommonConstant.URL_DATA_CONFIG);
     }
 
-    private void uploadDataCS(final String id, final String scanner, final String fixture, final String store,
-                            final String sku, final String classno, final String price, final String qty,
-                            final String nik, final String stamp, final String type) {
+    private void uploadDataCS(final String id, final String scanner, final String fixture, final String bc1, final String bc2,
+                              final String qty, final String nik, final String stamp, final String type) {
         customProgressDialog.showDialog();
 
         StringRequest volleyRequest = new StringRequest(Request.Method.POST, CommonConstant.URL_DATA_STOCKTAKE_CS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Upload Data CS Response: " + response.toString());
+                Log.d(TAG, "Upload Data CS Response: " + response);
 
                 try {
                     JSONObject responseObject = new JSONObject(response);
@@ -532,11 +585,12 @@ public class SettingsFragment extends Fragment {
                     if (error) {
                         showMessage(responseObject.getString("message"));
                     } else {
-                        Integer id = Integer.valueOf(responseObject.getString("id"));
+                        JSONObject data = responseObject.getJSONObject("data");
+                        Integer id = Integer.valueOf(data.getString("id"));
 
                         databaseManager.deleteStocktake(new Stocktake(id));
 
-                        Log.d(TAG, "Succesfully synchronize for " + "Id : " + id);
+                        Log.d(TAG, responseObject.getString("message") + "Id : " + id);
 
                         showConfiguration();
                     }
@@ -560,11 +614,8 @@ public class SettingsFragment extends Fragment {
                     if (customProgressDialog.isShowing()) {
                         customProgressDialog.hideDialog();
                     }
-                    if (error.networkResponse.statusCode == 400) {
-                        showMessage(getResources().getString(R.string.network_error));
-                    } else {
-                        showMessage(getResources().getString(R.string.timeout_error));
-                    }
+
+                    showMessage("Oops... Something went wrong!");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -577,10 +628,8 @@ public class SettingsFragment extends Fragment {
                 params.put("id", id);
                 params.put("scanner", scanner);
                 params.put("fixture", fixture);
-                params.put("store", store);
-                params.put("sku", sku);
-                params.put("class", classno);
-                params.put("price", price);
+                params.put("bc1", bc1);
+                params.put("bc2", bc2);
                 params.put("qty", qty);
                 params.put("nik", nik);
                 params.put("stamp", stamp);
@@ -603,15 +652,14 @@ public class SettingsFragment extends Fragment {
         MyApplication.getInstance().addToRequestQueue(volleyRequest, CommonConstant.URL_DATA_STOCKTAKE_CS);
     }
 
-    private void uploadDataDP(final String id, final String scanner, final String fixture, final String store,
-                              final String sku, final String classno, final String price, final String qty,
-                              final String nik, final String stamp, final String type) {
+    private void uploadDataDP(final String id, final String scanner, final String fixture, final String bc1, final String bc2,
+                              final String qty, final String nik, final String stamp, final String type) {
         customProgressDialog.showDialog();
 
         StringRequest volleyRequest = new StringRequest(Request.Method.POST, CommonConstant.URL_DATA_STOCKTAKE_DP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Upload Data DP Response: " + response.toString());
+                Log.d(TAG, "Upload Data DP Response: " + response);
 
                 try {
                     JSONObject responseObject = new JSONObject(response);
@@ -620,7 +668,8 @@ public class SettingsFragment extends Fragment {
                     if (error) {
                         showMessage(responseObject.getString("message"));
                     } else {
-                        Integer id = Integer.valueOf(responseObject.getString("id"));
+                        JSONObject data = responseObject.getJSONObject("data");
+                        Integer id = Integer.valueOf(data.getString("id"));
 
                         databaseManager.deleteStocktake(new Stocktake(id));
 
@@ -648,11 +697,8 @@ public class SettingsFragment extends Fragment {
                     if (customProgressDialog.isShowing()) {
                         customProgressDialog.hideDialog();
                     }
-                    if (error.networkResponse.statusCode == 400) {
-                        showMessage(getResources().getString(R.string.network_error));
-                    } else {
-                        showMessage(getResources().getString(R.string.timeout_error));
-                    }
+
+                    showMessage("Oops... Something went wrong!");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -665,10 +711,8 @@ public class SettingsFragment extends Fragment {
                 params.put("id", id);
                 params.put("scanner", scanner);
                 params.put("fixture", fixture);
-                params.put("store", store);
-                params.put("sku", sku);
-                params.put("class", classno);
-                params.put("price", price);
+                params.put("bc1", bc1);
+                params.put("bc2", bc2);
                 params.put("qty", qty);
                 params.put("nik", nik);
                 params.put("stamp", stamp);

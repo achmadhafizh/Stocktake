@@ -450,12 +450,11 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
             inputLayoutBc1.setError(getString(R.string.err_msg_bc11));
             requestFocus(inputBc1);
             return false;
-        } else if (inputBc1.getText().toString().trim().length() < 13) {
+        } else if (inputBc1.getText().toString().trim().length() < 16) {
             inputLayoutBc1.setError(getString(R.string.err_msg_bc12));
             requestFocus(inputBc1);
             return false;
-        } else if (Integer.parseInt(inputBc1.getText().toString().trim().substring(0, 1)) < 4 ||
-                   Integer.parseInt(inputBc1.getText().toString().trim().substring(0, 1)) > 4) {
+        } else if (Integer.parseInt(inputBc1.getText().toString().trim().substring(0, 1)) != 1) {
             inputLayoutBc1.setError(getString(R.string.err_msg_bc13));
             requestFocus(inputBc1);
             inputBc1.setSelectAllOnFocus(true);
@@ -482,12 +481,11 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
             inputLayoutBc2.setError(getString(R.string.err_msg_bc21));
             requestFocus(inputBc2);
             return false;
-        } else if (inputBc2.getText().toString().trim().length() < 13) {
+        } else if (inputBc2.getText().toString().trim().length() < 16) {
             inputLayoutBc2.setError(getString(R.string.err_msg_bc22));
             requestFocus(inputBc2);
             return false;
-        } else if (Integer.parseInt(inputBc2.getText().toString().trim().substring(0, 1)) < 7 ||
-                   Integer.parseInt(inputBc2.getText().toString().trim().substring(0, 1)) > 7) {
+        } else if (Integer.parseInt(inputBc2.getText().toString().trim().substring(0, 1)) != 8) {
             inputLayoutBc2.setError(getString(R.string.err_msg_bc23));
             requestFocus(inputBc2);
             inputBc2.setSelectAllOnFocus(true);

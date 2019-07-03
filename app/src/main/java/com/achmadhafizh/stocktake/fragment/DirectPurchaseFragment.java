@@ -51,10 +51,10 @@ import static com.achmadhafizh.stocktake.utilities.CommonConstant.ARG_ITEM;
 public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
     private static final String TAG = DirectPurchaseFragment.class.getSimpleName();
     private SettingsManager settingsManager;
-    private DatabaseManager db;
-    private List<Stocktake> stocktakeList;
+    public static DatabaseManager db;
+    public static List<Stocktake> stocktakeList;
     private HashMap<String, String> settingPrefs;
-    private InquiryAdapter mAdapter;
+    public static InquiryAdapter mAdapter;
     private String item, scannerID, storeNo;
 
     @BindView(R.id.rl_outer)
@@ -87,17 +87,10 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
     @BindView(R.id.input_bc2)
     EditText inputBc2;
 
-    @BindView(R.id.input_layout_qty)
-    TextInputLayout inputLayoutQty;
-
-    @BindView(R.id.input_qty)
-    EditText inputQty;
-
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    @BindView(R.id.tv_qty_footer)
-    TextView tv_qty_footer;
+    public static TextView tv_qty_footer;
 
     @BindView(R.id.tv_barcode_footer)
     TextView tv_barcode_footer;
@@ -130,6 +123,8 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
 
+        tv_qty_footer = view.findViewById(R.id.tv_qty_footer);
+
         setUpActionBar();
 
         db = new DatabaseManager(getActivity());
@@ -144,7 +139,6 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
         inputFixture.addTextChangedListener(new MyTextWatcher(inputFixture));
         inputBc1.addTextChangedListener(new MyTextWatcher(inputBc1));
         inputBc2.addTextChangedListener(new MyTextWatcher(inputBc2));
-        inputQty.addTextChangedListener(new MyTextWatcher(inputQty));
 
         inputNik.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -206,24 +200,6 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
                 if( keyCode == KeyEvent.KEYCODE_ENTER ) {
                     if( event.getAction() == KeyEvent.ACTION_UP ) {
                         if (validateBc2()) {
-                            requestFocus(inputQty);
-                            inputQty.setSelectAllOnFocus(true);
-                            inputQty.selectAll();
-                            //hideKeyboard(inputQty);
-                        }
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        inputQty.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if( keyCode == KeyEvent.KEYCODE_ENTER ) {
-                    if( event.getAction() == KeyEvent.ACTION_UP ) {
-                        if (validateQty()) {
                             submitForm();
                         }
                     }
@@ -247,7 +223,6 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
 
         prepareListData();
 
-        inputQty.setText("1");
         requestFocus(inputNik);
     }
 
@@ -337,7 +312,7 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
         inputBc1.selectAll();
     }
 
-    private void prepareListData() {
+    public static void prepareListData() {
         Log.d("Reading all ", "Stocktake DP");
         List<Stocktake> items = db.getAllStocktakeDP();
         int total = 0;
@@ -374,16 +349,12 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
             return;
         }
 
-        if (!validateQty()) {
-            return;
-        }
-
         String type = "DP";
         String nik = inputNik.getText().toString().trim();
         String fixture = inputFixture.getText().toString().trim();
         String bc1 = inputBc1.getText().toString().trim();
         String bc2 = inputBc2.getText().toString().trim();
-        Integer qty = Integer.parseInt(inputQty.getText().toString().trim());
+        Integer qty = 1;
 
         int cnt = db.getStocktakeCountDP(fixture, bc1, bc2);
         Log.d("Count Stocktake DP ", cnt + "");
@@ -531,30 +502,6 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
         return true;
     }
 
-    private boolean validateQty() {
-        if(scannerID == null || scannerID.isEmpty()) {
-            inputLayoutBc2.setError(getString(R.string.err_msg_settings));
-            requestFocus(inputBc2);
-            return false;
-        } else if(storeNo == null || storeNo.isEmpty()) {
-            inputLayoutBc2.setError(getString(R.string.err_msg_settings));
-            requestFocus(inputBc2);
-            return false;
-        } else if (inputQty.getText().toString().trim().isEmpty()) {
-            inputLayoutQty.setError(getString(R.string.err_msg_qty1));
-            requestFocus(inputQty);
-            return false;
-        } else if (Integer.parseInt(inputQty.getText().toString().trim()) < 1) {
-            inputLayoutQty.setError(getString(R.string.err_msg_qty2));
-            requestFocus(inputQty);
-            return false;
-        }  else {
-            inputLayoutQty.setErrorEnabled(false);
-        }
-
-        return true;
-    }
-
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -596,10 +543,14 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
                 case R.id.input_bc2:
                     validateBc2();
                     break;
-                case R.id.input_qty:
-                    validateQty();
-                    break;
             }
         }
+    }
+
+    public static void update_qty(int id, int qty) {
+        db.updateStocktake(new Stocktake(id, qty));
+        Log.d("Update ", "Updating ..");
+
+        prepareListData();
     }
 }

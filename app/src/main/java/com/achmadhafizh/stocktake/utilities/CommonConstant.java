@@ -5,11 +5,11 @@ package com.achmadhafizh.stocktake.utilities;
  */
 
 public class CommonConstant {
-    public static final String MAIN_URL = "http://192.168.0.25/ws-scanner/";
+    public static final String MAIN_URL = "http://apps.metroindonesia.com:8088/";
     public static String API_URL = MAIN_URL + "v1/";
-    public static final String URL_DATA_STOCKTAKE_CS = API_URL + "backupFileCS";
-    public static final String URL_DATA_STOCKTAKE_DP = API_URL + "backupFileDP";
-    public static final String URL_DATA_CONFIG = API_URL + "getConfig";
+    public static final String URL_DATA_STOCKTAKE_CS = API_URL + "stocktake/sync_cs";
+    public static final String URL_DATA_STOCKTAKE_DP = API_URL + "stocktake/sync_dp";
+    public static final String URL_DATA_CONFIG = API_URL + "stocktake/config";
 
     public static final String STATE_CURRENT_TAB_ID = "current_tab_id";
     public static final int MAIN_TAB_ID = 0;
