@@ -1,5 +1,6 @@
 package com.achmadhafizh.stocktake.activity;
 
+import android.Manifest;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,9 +23,16 @@ import com.achmadhafizh.stocktake.fragment.DirectPurchaseFragment;
 import com.achmadhafizh.stocktake.fragment.DirectPurchaseInquiryFragment;
 import com.achmadhafizh.stocktake.fragment.SettingsFragment;
 import com.achmadhafizh.stocktake.helper.BuilderManager;
+import com.achmadhafizh.stocktake.utilities.MultiplePermissionListener;
+import com.achmadhafizh.stocktake.utilities.PermissionErrorListener;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.jetradar.multibackstack.BackStackActivity;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.CompositeMultiplePermissionsListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.karumi.dexter.listener.multi.SnackbarOnAnyDeniedMultiplePermissionsListener;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
@@ -46,6 +54,8 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     private LayoutInflater mInflater;
     private View actionBarView;
     private BoomMenuButton rightBmb;
+    private MultiplePermissionsListener allPermissionsListener;
+    private PermissionRequestErrorListener errorListener;
     public static TextView mTitleTextView;
 
     @BindView(R.id.coordinatorLayout)
@@ -57,6 +67,9 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     @BindView(R.id.bottom_navigation)
     BottomNavigationBar bottomNavBar;
 
+    @BindView(android.R.id.content)
+    View contentView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +77,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
 
         ButterKnife.bind(this);
 
+        requestMultiplePermission();
         setUpTopNavBar();
         setUpBottomNavBar();
 
@@ -71,6 +85,29 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
             bottomNavBar.selectTab(MAIN_TAB_ID, false);
             showFragment(rootTabFragment(MAIN_TAB_ID));
         }
+    }
+
+    private void requestMultiplePermission() {
+        createPermissionListeners();
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(allPermissionsListener)
+                .withErrorListener(errorListener)
+                .check();
+    }
+
+    private void createPermissionListeners() {
+        MultiplePermissionsListener feedbackViewMultiplePermissionListener = new MultiplePermissionListener(this);
+
+        allPermissionsListener = new CompositeMultiplePermissionsListener(feedbackViewMultiplePermissionListener,
+                SnackbarOnAnyDeniedMultiplePermissionsListener.Builder.with(contentView, R.string.permission_rationale_message)
+                        .withOpenSettingsButton(R.string.permission_rationale_positive_button)
+                        .build());
+
+        errorListener = new PermissionErrorListener();
     }
 
     private void setUpTopNavBar() {

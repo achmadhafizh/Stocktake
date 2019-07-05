@@ -15,8 +15,8 @@ android {
         applicationId "com.achmadhafizh.stocktake"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 7
+        versionName "1.0.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary true
         signingConfig signingConfigs.config
@@ -53,6 +53,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.github.jetradarmobile:multibackstack:1.2.1'
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.3'
+    implementation 'com.karumi:dexter:5.0.0'
     testImplementation 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

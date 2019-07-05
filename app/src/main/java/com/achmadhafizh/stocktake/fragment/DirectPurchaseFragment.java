@@ -382,7 +382,7 @@ public class DirectPurchaseFragment extends Fragment implements RecyclerItemTouc
         prepareScanBarcode();
         hideKeyboard(inputBc1);
 
-        Snackbar snackbar = Snackbar.make(relativeLayout, " Record successfully added!", Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(relativeLayout, " Record successfully added!", Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
 

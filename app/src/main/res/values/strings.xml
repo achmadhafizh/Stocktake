@@ -85,6 +85,11 @@
 
     <string name="store_location">Input Store Location</string>
 
+    <string name="permission_rationale_title">Need Permissions</string>
+    <string name="permission_rationale_message">This permission is needed to increase user experience so please, allow it!</string>
+    <string name="permission_rationale_positive_button">GOTO SETTINGS</string>
+    <string name="permission_rationale_negative_button">LATER</string>
+
     <string name="unable_load">Unable Load Data</string>
     <string name="auth_failed">Authentication failed</string>
     <string name="auth_error">Cannot connect to Internet...Please check your connection!</string>

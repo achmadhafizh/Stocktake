@@ -179,7 +179,6 @@ public class SettingsFragment extends Fragment {
                 String stamp = currDate;
 
                 uploadDataCS(id.toString(), scanner, fixture, stk.getBc1(), stk.getBc2(), qty.toString(), nik, stamp, type);
-                //uploadDataCS(id.toString(), scanner, fixture, store, sku, classno, price, qty.toString(), nik, stamp, type);
             }
 
             flag_cs = true;
@@ -754,10 +753,20 @@ public class SettingsFragment extends Fragment {
             List<Stocktake> items = data;
 
             for (Stocktake stk : items) {
-                String text = stk.getScanner() + "|" + stk.getFixture() + "|" +
-                              stk.getFixture().substring(0, 2) + "|" + stk.getBc1().substring(5, 12) + "|" +
-                              stk.getBc1().substring(0, 5) + "|    |" + stk.getBc2().substring(1, 12) + "|" +
-                              stk.getQty() + "|" + stk.getNik() + "|" + time_stamp;
+                String text = "";
+
+                if(filePath.equals(DIRECTORY_STOCKTAKE_DP)) {
+                    text = stk.getScanner() + "|" + stk.getFixture() + "|" +
+                            stk.getFixture().substring(0, 2) + "|" + stk.getBc1().substring(5, 11) + "|" +
+                            stk.getBc1().substring(1, 5) + "|    |" + stk.getBc2().substring(1, 12) + "|" +
+                            stk.getQty() + "|" + stk.getNik() + "|" + time_stamp;
+                } else {
+                    text = stk.getScanner() + "|" + stk.getFixture() + "|" +
+                            stk.getFixture().substring(0, 2) + "|" +
+                            stk.getBc1().substring(1, 5) + stk.getBc2().substring(1, 16) + Integer.valueOf(stk.getBc1().substring(5, 16)) + "|" +
+                            stk.getBc1().substring(1, 5) + "|    |" + Integer.valueOf(stk.getBc1().substring(5, 16)) + "|" +
+                            stk.getQty() + "|" + stk.getNik() + "|" + time_stamp;
+                }
 
                 myOutWriter.append(text);
                 myOutWriter.append("\n");

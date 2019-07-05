@@ -381,7 +381,7 @@ public class ConsignmentFragment extends Fragment implements RecyclerItemTouchHe
         prepareScanBarcode();
         hideKeyboard(inputBc1);
 
-        Snackbar snackbar = Snackbar.make(relativeLayout, " Record successfully added!", Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(relativeLayout, " Record successfully added!", Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
 
